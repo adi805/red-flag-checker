@@ -5,10 +5,11 @@ import { motion, MotionProps } from 'framer-motion';
 interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, keyof MotionProps> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
+  children: React.ReactNode;
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'primary', size = 'md', ...props }, ref) => {
+  ({ className, variant = 'primary', size = 'md', children, ...props }, ref) => {
     const variants = {
       primary: 'bg-pink-500 text-white hover:bg-pink-600 shadow-lg shadow-pink-500/30',
       secondary: 'bg-rose-500 text-white hover:bg-rose-600 shadow-lg shadow-rose-500/30',
@@ -34,7 +35,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           className
         )}
         {...props}
-      />
+      >
+        {children}
+      </motion.button>
     );
   }
 );
